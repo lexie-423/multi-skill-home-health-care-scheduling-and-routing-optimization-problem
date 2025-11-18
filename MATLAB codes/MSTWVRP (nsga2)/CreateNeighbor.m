@@ -1,65 +1,25 @@
-function qnew=CreateNeighbor(q)
+function qnew=CreateNeighbor(q,modle)
 
+    %get length
+    N = modle.N;
+    P_uc = modle.Puc;
+    n = numel(q);
 
-% Three operations for creating a new solution 
+    %select a position
+    i = randi([1,n]);
+    qnew = q;
 
-    m=randi([1 3]);
-    
-    switch m
-        case 1
-            % Do Swap
-            qnew=Swap(q);
-            
-        case 2
-            % Do Reversion
-            qnew=Reversion(q);
-            
-        case 3
-            % Do Insertion
-            qnew=Insertion(q);
-    end
+    %bianyi
+    if i<= N
+        qnew(i) = 3-q(i);
 
-end
+    elseif i <= (N+P_uc)
+        qnew(i) = randi([1, N]);
 
-function qnew=Swap(q)
-
-    n=numel(q);
-    
-    i=randsample(n,2);
-    i1=i(1);
-    i2=i(2);
-    
-    qnew=q;
-    qnew([i1 i2])=q([i2 i1]);
-    
-end
-
-function qnew=Reversion(q)
-
-    n=numel(q);
-    
-    i=randsample(n,2);
-    i1=min(i(1),i(2));
-    i2=max(i(1),i(2));
-    
-    qnew=q;
-    qnew(i1:i2)=q(i2:-1:i1);
-
-end
-
-function qnew=Insertion(q)
-
-    n=numel(q);
-    
-    i=randsample(n,2);
-    i1=i(1);
-    i2=i(2);
-    
-    if i1<i2
-        qnew=[q(1:i1-1) q(i1+1:i2) q(i1) q(i2+1:end)];
     else
-        qnew=[q(1:i2) q(i1) q(i2+1:i1-1) q(i1+1:end)];
-    end
+        qnew(i) = randi([1, N]);
 
+    end
 end
+
 

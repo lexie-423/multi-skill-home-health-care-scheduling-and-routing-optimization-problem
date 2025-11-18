@@ -87,7 +87,7 @@ for it=1:MaxIt
           p1=pop(i1);
           p2=pop(i2);
             
-           [pop2(k,1).Position, pop2(k,2).Position]=PermutationCrossover(p1.Position,p2.Position);         
+           [pop2(k,1).Position, pop2(k,2).Position]=PermutationCrossover(p1.Position,p2.Position,model);         
            [pop2(k,1).Cost, pop2(k,1).Sol]=CostFunction(pop2(k,1).Position,model);
            [pop2(k,2).Cost, pop2(k,2).Sol]=CostFunction(pop2(k,2).Position,model);
   
@@ -100,7 +100,7 @@ for it=1:MaxIt
           
            i=TournamentSelection(pop);         
 
-           pop3(k).Position=CreateNeighbor(pop(i).Position);
+           pop3(k).Position=CreateNeighbor(pop(i).Position,model);
            [pop3(k).Cost, pop3(k).Sol]=CostFunction(pop3(k).Position,model); 
                    
       end
